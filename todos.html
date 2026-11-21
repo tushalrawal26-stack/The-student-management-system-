@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f6f2">
+    <meta name="application-name" content="JARVIS">
+    <title>JARVIS — To-do list</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/svg+xml" href="icons/jarvis.svg">
+    <link rel="stylesheet" href="assets/dashboard.css?v=glass-3">
+    <script src="assets/dashboard.js" defer></script>
+</head>
+<body data-page="todos">
+    <div class="app">
+        <aside class="sidebar">
+            <div class="brand"><span class="brand-mark">J</span> JARVIS</div>
+            <p class="nav-label">Workspace</p>
+            <nav class="nav" aria-label="Main navigation">
+                <a href="testing_cade_X.html"><span class="nav-icon">⌂</span>Overview</a>
+                <a href="expenses.html"><span class="nav-icon">◉</span>Expenses</a>
+                <a href="study.html"><span class="nav-icon">▤</span>Study time</a>
+                <a class="active" href="todos.html" aria-current="page"><span class="nav-icon">✓</span>To-do list</a>
+            </nav>
+            <div class="sidebar-note"><strong>Quick notes</strong>A little space for ideas, reminders, and things to remember.</div>
+        </aside>
+        <main>
+            <header class="topbar">
+                <div><p class="eyebrow">ONE THING AT A TIME</p><h1>Your to-do list</h1></div>
+                <div class="topbar-actions">
+                    <button class="install-button" id="install-app" type="button" hidden><span aria-hidden="true">↓</span><span class="install-label">Install app</span></button>
+                    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="theme-icon" id="theme-icon" aria-hidden="true">☾</span><span class="theme-label" id="theme-label">Dark mode</span></button>
+                    <div class="date-chip" aria-label="Current date and time"><span id="today-date"></span><span class="date-divider" aria-hidden="true"></span><time id="today-time" aria-label="Current time"></time></div>
+                </div>
+            </header>
+            <section class="welcome" aria-label="Daily encouragement">
+                <div><h2>Make room for what matters 🌱</h2><p>Add a task, then check it off when you're done.</p></div>
+                <span class="welcome-icon" aria-hidden="true">✓</span>
+            </section>
+            <section class="stats two" aria-label="Task summary">
+                <article class="card stat-card">
+                    <div class="stat-top"><span>Tasks to do</span><span class="stat-icon blue">✓</span></div>
+                    <div class="stat-value" id="tasks-left">0</div><div class="stat-hint">Take them one at a time</div>
+                </article>
+                <article class="card stat-card">
+                    <div class="stat-top"><span>Your list</span><span class="stat-icon">▤</span></div>
+                    <div class="stat-value" id="todo-total">0 tasks on your list</div><div class="stat-hint" id="tasks-hint">Nothing on your list yet</div>
+                </article>
+            </section>
+            <section class="card form-card">
+                <div class="card-heading"><div><h2>Add a task</h2><p>Write it down, then enjoy that little win when it's done.</p></div><span class="form-decoration" aria-hidden="true">✓</span></div>
+                <form id="todo-form" class="inline-form entry-form todo-entry-form">
+                    <div class="field">
+                        <label class="field-label" for="todo-title">What's on your mind?</label>
+                        <input id="todo-title" type="text" maxlength="100" placeholder="e.g. Review today's notes" autocomplete="off" required>
+                    </div>
+                    <button class="action-button form-submit" type="submit"><span aria-hidden="true">＋</span> Add task</button>
+                </form>
+            </section>
+            <section class="card space-top">
+                <div class="card-heading"><div><h2>Your tasks</h2><p>Check off completed tasks or remove a task from your list</p></div></div>
+                <div id="todo-list" class="list" aria-live="polite"></div>
+            </section>
+            <p id="notice" class="notice" role="status"></p>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f6f2">
+    <meta name="application-name" content="JARVIS">
+    <title>JARVIS — Study time</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/svg+xml" href="icons/jarvis.svg">
+    <link rel="stylesheet" href="assets/dashboard.css?v=glass-3">
+    <script src="assets/dashboard.js" defer></script>
+</head>
+<body data-page="study">
+    <div class="app">
+        <aside class="sidebar">
+            <div class="brand"><span class="brand-mark">J</span> JARVIS</div>
+            <p class="nav-label">Workspace</p>
+            <nav class="nav" aria-label="Main navigation">
+                <a href="testing_cade_X.html"><span class="nav-icon">⌂</span>Overview</a>
+                <a href="expenses.html"><span class="nav-icon">◉</span>Expenses</a>
+                <a class="active" href="study.html" aria-current="page"><span class="nav-icon">▤</span>Study time</a>
+                <a href="todos.html"><span class="nav-icon">✓</span>To-do list</a>
+            </nav>
+            <div class="sidebar-note"><strong>Quick notes</strong>A little space for ideas, reminders, and things to remember.</div>
+        </aside>
+        <main>
+            <header class="topbar">
+                <div><p class="eyebrow">MAKE TIME TO LEARN</p><h1>Study time</h1></div>
+                <div class="topbar-actions">
+                    <button class="install-button" id="install-app" type="button" hidden><span aria-hidden="true">↓</span><span class="install-label">Install app</span></button>
+                    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="theme-icon" id="theme-icon" aria-hidden="true">☾</span><span class="theme-label" id="theme-label">Dark mode</span></button>
+                    <div class="date-chip" aria-label="Current date and time"><span id="today-date"></span><span class="date-divider" aria-hidden="true"></span><time id="today-time" aria-label="Current time"></time></div>
+                </div>
+            </header>
+            <section class="stats two" aria-label="Study summary">
+                <article class="card stat-card">
+                    <div class="stat-top"><span>Study time this week</span><span class="stat-icon">▤</span></div>
+                    <div class="stat-value" id="week-study">0h 0m</div><div class="stat-hint" id="study-hint">Add your first study session</div>
+                </article>
+                <article class="card stat-card">
+                    <div class="stat-top"><span>Sessions this week</span><span class="stat-icon blue">✓</span></div>
+                    <div class="stat-value" id="session-count">0</div><div class="stat-hint">Every focused minute counts</div>
+                </article>
+            </section>
+            <section class="charts" aria-label="Study time chart">
+                <article class="card">
+                    <div class="card-heading"><div><h2>Your study time</h2><p>Hours studied each day</p></div><span class="period">THIS WEEK</span></div>
+                    <div id="study-chart" class="chart" role="img" aria-label="Study hours this week"></div>
+                    <div class="chart-legend"><span><i class="legend-dot"></i>Hours studied</span></div>
+                </article>
+                <article class="card">
+                    <div class="card-heading"><div><h2>Focus timer</h2><p>Start a session and focus on one thing</p></div></div>
+                    <div class="timer-box">
+                        <div><span class="timer-label" id="timer-label">Ready when you are</span><span class="timer-value" id="timer-value">00:00:00</span></div>
+                        <div class="timer-actions">
+                            <button class="action-button secondary cancel-timer" id="cancel-timer" type="button" aria-label="Cancel current study session" disabled>Cancel</button>
+                            <button class="action-button" id="timer-button" type="button">Start studying</button>
+                        </div>
+                    </div>
+                </article>
+            </section>
+            <section class="grid-two">
+                <article class="card form-card">
+                    <div class="card-heading"><div><h2>Add study time</h2><p>Log a session you already completed</p></div><span class="form-decoration" aria-hidden="true">＋</span></div>
+                    <form id="study-form" class="inline-form entry-form study-entry-form">
+                        <div class="field">
+                            <label class="field-label" for="study-subject">What did you study?</label>
+                            <input id="study-subject" type="text" maxlength="60" placeholder="e.g. Biology" autocomplete="off" required>
+                        </div>
+                        <div class="field">
+                            <label class="field-label" for="study-minutes">Time spent</label>
+                            <div class="input-affix suffix"><input id="study-minutes" type="number" min="1" max="1440" placeholder="30" inputmode="numeric" required><span>min</span></div>
+                        </div>
+                        <button class="action-button secondary form-submit" type="submit"><span aria-hidden="true">＋</span> Add time</button>
+                    </form>
+                    <p class="eyebrow">You can enter between 1 and 1,440 minutes.</p>
+                </article>
+                <article class="card">
+                    <div class="card-heading"><div><h2>Study sessions</h2><p>Recent subjects and study time</p></div></div>
+                    <div id="study-list" class="list" aria-live="polite"></div>
+                </article>
+            </section>
+            <dialog class="session-dialog" id="session-dialog" aria-labelledby="session-dialog-title" aria-describedby="session-duration">
+                <form class="dialog-form" id="session-form">
+                    <span class="dialog-icon" aria-hidden="true">📚</span>
+                    <p class="eyebrow">NICE FOCUS</p>
+                    <h2 id="session-dialog-title">Session complete</h2>
+                    <p class="dialog-copy" id="session-duration"></p>
+                    <div class="field">
+                        <label class="field-label" for="session-subject">What did you study?</label>
+                        <input id="session-subject" type="text" maxlength="60" placeholder="e.g. Biology" autocomplete="off" required>
+                    </div>
+                    <div class="dialog-actions">
+                        <button class="action-button secondary" id="cancel-session" type="button">Keep studying</button>
+                        <button class="action-button" type="submit">Save session</button>
+                    </div>
+                </form>
+            </dialog>
+            <p id="notice" class="notice" role="status"></p>
+        </main>
+    </div>
+</body>
+</html>

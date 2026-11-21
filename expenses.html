@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f6f2">
+    <meta name="application-name" content="JARVIS">
+    <title>JARVIS — Expenses</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/svg+xml" href="icons/jarvis.svg">
+    <link rel="stylesheet" href="assets/dashboard.css?v=glass-3">
+    <script src="assets/dashboard.js" defer></script>
+</head>
+<body data-page="expenses">
+    <div class="app">
+        <aside class="sidebar">
+            <div class="brand"><span class="brand-mark">J</span> JARVIS</div>
+            <p class="nav-label">Workspace</p>
+            <nav class="nav" aria-label="Main navigation">
+                <a href="testing_cade_X.html"><span class="nav-icon">⌂</span>Overview</a>
+                <a class="active" href="expenses.html" aria-current="page"><span class="nav-icon">◉</span>Expenses</a>
+                <a href="study.html"><span class="nav-icon">▤</span>Study time</a>
+                <a href="todos.html"><span class="nav-icon">✓</span>To-do list</a>
+            </nav>
+            <div class="sidebar-note"><strong>Quick notes</strong>A little space for ideas, reminders, and things to remember.</div>
+        </aside>
+        <main>
+            <header class="topbar">
+                <div><p class="eyebrow">YOUR MONEY</p><h1>Expenses</h1></div>
+                <div class="topbar-actions">
+                    <button class="install-button" id="install-app" type="button" hidden><span aria-hidden="true">↓</span><span class="install-label">Install app</span></button>
+                    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="theme-icon" id="theme-icon" aria-hidden="true">☾</span><span class="theme-label" id="theme-label">Dark mode</span></button>
+                    <div class="date-chip" aria-label="Current date and time"><span id="today-date"></span><span class="date-divider" aria-hidden="true"></span><time id="today-time" aria-label="Current time"></time></div>
+                </div>
+            </header>
+            <section class="stats two" aria-label="Monthly expense summary">
+                <article class="card stat-card">
+                    <div class="stat-top"><span>Spent this month</span><span class="stat-icon orange">◉</span></div>
+                    <div class="stat-value" id="month-spent">₹0</div><div class="stat-hint">Total of your expense entries</div>
+                </article>
+                <article class="card stat-card">
+                    <div class="stat-top"><span>Entries</span><span class="stat-icon">▤</span></div>
+                    <div class="stat-value" id="expense-count">0 expenses this month</div><div class="stat-hint">Track spending to see your patterns</div>
+                </article>
+            </section>
+            <section class="charts" aria-label="Expense chart">
+                <article class="card">
+                    <div class="card-heading"><div><h2>Spending this week</h2><p>Daily spending at a glance</p></div><span class="period">THIS WEEK</span></div>
+                    <div id="expense-chart" class="chart" role="img" aria-label="Expenses this week"></div>
+                    <div class="chart-legend"><span><i class="legend-dot orange"></i>Amount spent</span></div>
+                </article>
+                <article class="card">
+                    <div class="card-heading"><div><h2>By category</h2><p>This month at a glance</p></div></div>
+                    <div id="category-list" class="list"></div>
+                </article>
+            </section>
+            <section class="card section-card form-card">
+                <div class="card-heading"><div><h2>Add an expense</h2><p>A quick note is all it takes to stay on top of your spending.</p></div><span class="form-decoration" aria-hidden="true">＋</span></div>
+                <form id="expense-form" class="inline-form entry-form expense-form">
+                    <div class="field">
+                        <label class="field-label" for="expense-name">What was it for?</label>
+                        <input class="name-field" id="expense-name" type="text" maxlength="60" placeholder="e.g. Lunch with friends" autocomplete="off" required>
+                    </div>
+                    <div class="field">
+                        <label class="field-label" for="expense-amount">How much?</label>
+                        <div class="input-affix"><span aria-hidden="true">₹</span><input id="expense-amount" type="number" min="0.01" step="0.01" placeholder="0.00" inputmode="decimal" required></div>
+                    </div>
+                    <div class="field">
+                        <label class="field-label" for="expense-category">Category</label>
+                        <select id="expense-category"><option>Food</option><option>Travel</option><option>Study</option><option>Shopping</option><option>Other</option></select>
+                    </div>
+                    <div class="field">
+                        <label class="field-label" for="expense-date">Date</label>
+                        <input id="expense-date" type="date" required>
+                    </div>
+                    <button class="action-button form-submit" type="submit"><span aria-hidden="true">＋</span> Add expense</button>
+                </form>
+            </section>
+            <section class="card section-card space-top">
+                <div class="card-heading"><div><h2>All expenses</h2><p>Your spending history</p></div></div>
+                <div id="expense-list" class="list" aria-live="polite"></div>
+            </section>
+            <p id="notice" class="notice" role="status"></p>
+        </main>
+    </div>
+</body>
+</html>
